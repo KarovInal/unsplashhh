@@ -1,1 +1,1 @@
-console.log('test');
+import store from './store';
