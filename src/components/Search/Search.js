@@ -14,15 +14,19 @@ class Search extends Component {
       }
     })
   }
+  onSubmitSearch(e) {
+    e.preventDefault();
+    this.props.fetchPhotos();
+  }
   render() {
     let {
       value
     } = this.state;
 
     return (
-      <div>
+      <form onSubmit={ e => this.onSubmitSearch(e) }>
         <input placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
-      </div>
+      </form>
     )
   }
 }

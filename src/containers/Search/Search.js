@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import Search from '../../components/Search/Search.js'
+import Search from '../../components/Search/Search.js';
+import { FetchImages } from '../../actions/tabs.js';
 
 let mapStateToProps = state => (
   {
@@ -7,4 +8,12 @@ let mapStateToProps = state => (
   }
 )
 
-export default connect(mapStateToProps)(Search);
+let mapDispatchToProps = dispatch => (
+  {
+    fetchPhotos: () => {
+      dispatch(FetchImages)
+    }
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
