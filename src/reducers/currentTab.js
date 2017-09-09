@@ -1,4 +1,4 @@
-import { searchTab } from '../constants/searchTab.js';
+import { searchTab } from '../constants/tabs.js';
 
 const defaultTab = searchTab;
 

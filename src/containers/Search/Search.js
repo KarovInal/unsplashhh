@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Search from '../../components/Search/Search.js';
-import { FetchImages } from '../../actions/tabs.js';
+import { requestPhotos, setSearchValue } from '../../actions/tabs.js';
 
 let mapStateToProps = state => (
   {
@@ -10,8 +10,11 @@ let mapStateToProps = state => (
 
 let mapDispatchToProps = dispatch => (
   {
-    fetchPhotos: () => {
-      dispatch(FetchImages)
+    requestPhotos: () => {
+      dispatch(requestPhotos)
+    },
+    setSearchValue: (newSearchValue) => {
+      dispatch(setSearchValue(newSearchValue))
     }
   }
 )

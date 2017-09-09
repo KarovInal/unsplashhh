@@ -16,7 +16,11 @@ class Search extends Component {
   }
   onSubmitSearch(e) {
     e.preventDefault();
-    this.props.fetchPhotos();
+
+    let searchValue = this.state.value;
+    
+    this.props.setSearchValue(searchValue);
+    this.props.requestPhotos();
   }
   render() {
     let {

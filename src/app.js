@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 
 import App from './components/app.js';
 import store from './store';
+import unsplash from './config/unsplash.js';
 
 render(
   <Provider store={store}>
