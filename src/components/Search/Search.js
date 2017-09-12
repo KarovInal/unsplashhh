@@ -16,6 +16,7 @@ class Search extends Component {
   }
   onSubmitSearch(e) {
     e.preventDefault();
+    this._input.blur();
 
     let searchValue = this.state.value;
     
@@ -29,7 +30,7 @@ class Search extends Component {
 
     return (
       <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
-        <input className='photo-input' placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
+        <input className='photo-input' ref={ link => this._input = link } placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
       </form>
     )
   }
