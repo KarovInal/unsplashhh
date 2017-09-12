@@ -3,6 +3,7 @@ import {
     downloadedTab, 
     favoritTab, 
     RESPONSE_PHOTOS_SUCСESS,
+    REQUEST_PHOTO,
     SET_SEARCH_VALUE } from '../constants/tabs.js'
 
 const defaultTabs = {
@@ -28,6 +29,10 @@ export default function tabs(state = defaultTabs, action) {
             searchValue: action.data.searchValue
           }
         })
+    case REQUEST_PHOTO:
+      return Object.assign({}, state, {
+        [searchTab]: Object.assign({}, state[searchTab], { photos: [] })
+      })
     default:
       return state
   }

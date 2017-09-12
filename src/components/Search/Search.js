@@ -26,7 +26,6 @@ class Search extends Component {
     let {
       value
     } = this.state;
-    this.props.requestPhotos();
 
     return (
       <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>

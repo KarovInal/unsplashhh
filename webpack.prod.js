@@ -24,13 +24,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg)/,
+        test: /\.(png|jpg|jpeg|gif)/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: 'img/icons/[name].[ext]'
+              name: 'img/icons/[name].[ext]',
+              useRelativePath: true
             }
           }
         ]

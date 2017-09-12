@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PhotoItem from './PhotoItem.js';
 import PhotoGalley from './PhotoGalley.js';
 
+import loader from './loader.gif';
+
 class DisplayPhotos extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isDispalayPhoto: false,
       currentIndex: null
@@ -18,7 +21,19 @@ class DisplayPhotos extends Component {
           isDispalayPhoto: true,
           currentIndex: index
         }
-      });  
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let isFetch = nextProps.isFetch;
+
+    if(isFetch) {
+      this.setState(() => {
+        return {
+          isDispalayPhoto: false
+        }
+      })
     }
   }
 
@@ -37,6 +52,9 @@ class DisplayPhotos extends Component {
 
     return (
       <div>
+        {
+          this.props.isFetch ? <img className='loader-gif' src={loader} /> : null
+        }
         {
           isDispalayPhoto ? 
             <PhotoGalley 
