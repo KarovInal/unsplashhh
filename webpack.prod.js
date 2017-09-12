@@ -22,6 +22,18 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg|jpeg)/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'img/icons/[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

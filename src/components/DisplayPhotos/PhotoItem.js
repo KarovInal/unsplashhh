@@ -1,4 +1,5 @@
 import React from 'react';
+import download from './download.png';
 
 export default function(props) {
   let {
@@ -21,7 +22,7 @@ export default function(props) {
           <img src={user.profile_image.small} className='photo-user-img' />
           <p className='photo-user-name'>{ user.first_name }</p>
         </a>
-        <a className='photo-download-link' rel="nofollow" target="_blank" href={ `${links.download}/?force=true` }><img src="./img/icons/download.png" /></a>
+        <a className='photo-download-link' rel="nofollow" target="_blank" href={ `${links.download}/?force=true` }><img src={download} /></a>
       </div>
     </div>
   )
