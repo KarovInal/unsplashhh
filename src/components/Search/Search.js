@@ -28,8 +28,8 @@ class Search extends Component {
     } = this.state;
 
     return (
-      <form onSubmit={ e => this.onSubmitSearch(e) }>
-        <input placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
+      <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
+        <input className='photo-input' placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
       </form>
     )
   }
