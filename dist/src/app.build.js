@@ -11323,7 +11323,7 @@ var _app = __webpack_require__(254);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _store = __webpack_require__(277);
+var _store = __webpack_require__(279);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -26960,6 +26960,8 @@ var Search = function (_Component) {
     _this.state = {
       value: ''
     };
+
+    _this.props.requestPhotos();
     return _this;
   }
 
@@ -26978,6 +26980,7 @@ var Search = function (_Component) {
     key: 'onSubmitSearch',
     value: function onSubmitSearch(e) {
       e.preventDefault();
+      this._input.blur();
 
       var searchValue = this.state.value;
 
@@ -26997,7 +27000,9 @@ var Search = function (_Component) {
         { className: 'photo-form', onSubmit: function onSubmit(e) {
             return _this2.onSubmitSearch(e);
           } },
-        _react2.default.createElement('input', { className: 'photo-input', placeholder: '\u0427\u0442\u043E \u0431\u0443\u0434\u0435\u043C \u0438\u0441\u043A\u0430\u0442\u044C?', value: value, onChange: function onChange(e) {
+        _react2.default.createElement('input', { className: 'photo-input', ref: function ref(link) {
+            return _this2._input = link;
+          }, placeholder: '\u0427\u0442\u043E \u0431\u0443\u0434\u0435\u043C \u0438\u0441\u043A\u0430\u0442\u044C?', value: value, onChange: function onChange(e) {
             return _this2.onChangeInput(e);
           } })
       );
@@ -27041,7 +27046,7 @@ function requestPhotos(dispatch, getState) {
 
   setTimeout(function () {
     dispatch(responsePhotoSuccess(photos));
-  }, 2000);
+  }, 0);
 
   // unsplash.photos.searchPhotos(searchValue, [], 1, 30)
   //   .then(toJson)
@@ -28216,7 +28221,7 @@ var _PhotoGalley = __webpack_require__(275);
 
 var _PhotoGalley2 = _interopRequireDefault(_PhotoGalley);
 
-var _loader = __webpack_require__(276);
+var _loader = __webpack_require__(278);
 
 var _loader2 = _interopRequireDefault(_loader);
 
@@ -28408,6 +28413,14 @@ var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _back = __webpack_require__(276);
+
+var _back2 = _interopRequireDefault(_back);
+
+var _forward = __webpack_require__(277);
+
+var _forward2 = _interopRequireDefault(_forward);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28440,8 +28453,8 @@ var PhotoGalley = function (_Component) {
       return newIndex > 0 ? newIndex : 0;
     }
   }, {
-    key: 'forvard',
-    value: function forvard(index, length) {
+    key: 'forward',
+    value: function forward(index, length) {
       var newIndex = index + 1;
       return newIndex < length - 1 ? newIndex : length - 1;
     }
@@ -28461,8 +28474,8 @@ var PhotoGalley = function (_Component) {
       });
     }
   }, {
-    key: 'onForvard',
-    value: function onForvard() {
+    key: 'onForward',
+    value: function onForward() {
       var _this3 = this;
 
       var photos = this.props.photos;
@@ -28471,9 +28484,18 @@ var PhotoGalley = function (_Component) {
 
       this.setState(function () {
         return {
-          currentIndex: _this3.forvard(currentIndex, photos.length)
+          currentIndex: _this3.forward(currentIndex, photos.length)
         };
       });
+    }
+  }, {
+    key: 'closeGallery',
+    value: function closeGallery(_ref) {
+      var target = _ref.target;
+
+      if (this._galleryWrap === target) {
+        this.props.onClick();
+      }
     }
   }, {
     key: 'render',
@@ -28488,34 +28510,48 @@ var PhotoGalley = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement('img', { src: photos[currentIndex].urls.small }),
-        currentIndex > 0 ? _react2.default.createElement(
-          'button',
-          { onClick: function onClick(e) {
-              _this4.onBack();
-            } },
-          'Назад'
-        ) : null,
-        currentIndex < photos.length - 1 ? _react2.default.createElement(
-          'button',
-          { onClick: function onClick(e) {
-              _this4.onForvard();
-            } },
-          'Далее'
-        ) : null,
+        { ref: function ref(link) {
+            return _this4._galleryWrap = link;
+          }, onClick: function onClick(e) {
+            return _this4.closeGallery(e);
+          }, className: 'gallery-wrap' },
         _react2.default.createElement(
-          'button',
-          { onClick: onClick },
-          'Закрыть'
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          'Photos: ',
-          photos.length,
-          ', ',
-          currentIndex + 1
+          'div',
+          { className: 'gallery-content' },
+          _react2.default.createElement(
+            'div',
+            { className: 'gallery-close' },
+            _react2.default.createElement(
+              'button',
+              { onClick: onClick },
+              'x'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'gallery-photo-wrap' },
+            _react2.default.createElement('img', { onClick: function onClick(e) {
+                _this4.onForward();
+              }, className: 'gallery-photo', src: photos[currentIndex].urls.small })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'gallery-controls' },
+            currentIndex > 0 ? _react2.default.createElement('img', { src: _back2.default, className: 'gallery-back', onClick: function onClick(e) {
+                _this4.onBack();
+              } }) : null,
+            _react2.default.createElement(
+              'p',
+              null,
+              'Photos: ',
+              photos.length,
+              ', ',
+              currentIndex + 1
+            ),
+            currentIndex < photos.length - 1 ? _react2.default.createElement('img', { src: _forward2.default, className: 'gallery-forward', onClick: function onClick(e) {
+                _this4.onForward();
+              } }) : null
+          )
         )
       );
     }
@@ -28530,10 +28566,22 @@ exports.default = PhotoGalley;
 /* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "../img/icons/loader.gif";
+module.exports = __webpack_require__.p + "../img/icons/back.png";
 
 /***/ }),
 /* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "../img/icons/forward.png";
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "../img/icons/loader.gif";
+
+/***/ }),
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28545,15 +28593,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(43);
 
-var _reducers = __webpack_require__(278);
+var _reducers = __webpack_require__(280);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _reduxThunk = __webpack_require__(282);
+var _reduxThunk = __webpack_require__(284);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _log = __webpack_require__(283);
+var _log = __webpack_require__(285);
 
 var _log2 = _interopRequireDefault(_log);
 
@@ -28564,7 +28612,7 @@ var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddlewa
 exports.default = store;
 
 /***/ }),
-/* 278 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28576,15 +28624,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(43);
 
-var _tabs = __webpack_require__(279);
+var _tabs = __webpack_require__(281);
 
 var _tabs2 = _interopRequireDefault(_tabs);
 
-var _currentTab = __webpack_require__(280);
+var _currentTab = __webpack_require__(282);
 
 var _currentTab2 = _interopRequireDefault(_currentTab);
 
-var _isFetch = __webpack_require__(281);
+var _isFetch = __webpack_require__(283);
 
 var _isFetch2 = _interopRequireDefault(_isFetch);
 
@@ -28599,7 +28647,7 @@ var reducer = (0, _redux.combineReducers)({
 exports.default = reducer;
 
 /***/ }),
-/* 279 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28642,7 +28690,7 @@ function tabs() {
 }
 
 /***/ }),
-/* 280 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28665,7 +28713,7 @@ function currentTab() {
 }
 
 /***/ }),
-/* 281 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28693,7 +28741,7 @@ function isFetch() {
 }
 
 /***/ }),
-/* 282 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28722,7 +28770,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 283 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

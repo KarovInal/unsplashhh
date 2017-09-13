@@ -15,7 +15,7 @@ export function requestPhotos(dispatch, getState) {
 
   setTimeout(() => {
     dispatch(responsePhotoSuccess(photos));
-  }, 2000)
+  }, 0);
 
   // unsplash.photos.searchPhotos(searchValue, [], 1, 30)
   //   .then(toJson)

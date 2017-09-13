@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import back from './back.png';
+import forward from './forward.png';
+
 class PhotoGalley extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,7 @@ class PhotoGalley extends Component {
     return newIndex > 0 ? newIndex : 0;
   }
 
-  forvard(index, length) {
+  forward(index, length) {
     let newIndex = index + 1;
     return newIndex < length - 1 ? newIndex : length - 1;
   }
@@ -39,7 +42,7 @@ class PhotoGalley extends Component {
     })
   }
 
-  onForvard() {
+  onForward() {
     let {
       photos
     } = this.props;
@@ -50,9 +53,15 @@ class PhotoGalley extends Component {
 
     this.setState(() => {
       return {
-        currentIndex: this.forvard(currentIndex, photos.length)
+        currentIndex: this.forward(currentIndex, photos.length)
       }
     })
+  }
+
+  closeGallery({ target }) {
+    if(this._galleryWrap === target) {
+      this.props.onClick();
+    }
   }
 
   render() {
@@ -66,20 +75,32 @@ class PhotoGalley extends Component {
     } = this.state;
 
     return (
-      <div>
-        <img src={photos[currentIndex].urls.small} />
-        {
-          currentIndex > 0
-            ? <button onClick={ e => { this.onBack() } }>{'Назад'}</button>
-            : null
-        }
-        {
-          currentIndex < photos.length - 1
-            ? <button onClick={ e => { this.onForvard() } }>{'Далее'}</button>
-            : null
-        }
-        <button onClick={onClick}>{'Закрыть'}</button>
-        <p>Photos: {photos.length}, {currentIndex + 1}</p>
+      <div ref={ link => this._galleryWrap = link } onClick={ e => this.closeGallery(e) } className='gallery-wrap'>
+        <div className='gallery-content'>
+          <div className='gallery-close'>
+            <button onClick={onClick}>{'x'}</button>
+          </div>
+          
+          <div className='gallery-photo-wrap'>
+            <img onClick={ e => {this.onForward()} } className='gallery-photo' src={photos[currentIndex].urls.small} />
+          </div>
+          
+          <div className='gallery-controls'>
+            {
+              currentIndex > 0
+                ? <img src={back} className='gallery-back' onClick={ e => {this.onBack()} } />
+                : null
+            }
+
+            <p>Photos: {photos.length}, {currentIndex + 1}</p>
+
+            {
+              currentIndex < photos.length - 1
+                ? <img src={forward} className='gallery-forward' onClick={ e => {this.onForward()} } />
+                : null
+            }
+          </div>
+        </div>
       </div>
     )
   }

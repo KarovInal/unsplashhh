@@ -7,8 +7,8 @@ module.exports = {
     app: __dirname + '/src/app.js'
   },
   output: {
-    path: __dirname + '/public/src/',
-    filename: '[name].build.min.js'
+    path: __dirname + '/public/',
+    filename: 'src/js/[name].build.min.js'
   },
   module: {
     rules: [
@@ -30,8 +30,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'img/icons/[name].[ext]',
-              useRelativePath: true
+              name: 'src/img/icons/[name].[ext]'
             }
           }
         ]
