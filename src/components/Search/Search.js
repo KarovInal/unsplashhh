@@ -6,8 +6,6 @@ class Search extends Component {
     this.state = {
       value: ''
     }
-
-    this.props.requestPhotos();
   }
   onChangeInput({target: { value }}) {
     this.setState((state) => {

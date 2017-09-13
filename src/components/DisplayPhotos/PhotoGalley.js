@@ -15,6 +15,31 @@ class PhotoGalley extends Component {
     this.state = {
       currentIndex
     }
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(event) {
+    let { key } = event;
+
+    switch(key) {
+      case 'ArrowLeft':
+        return this.onBack();
+      case 'ArrowRight':
+        return this.onForward();
+      case 'Escape':
+        return this.props.onClick();
+      default:
+        return false;
+    }
   }
 
   back(index, length) {
@@ -59,6 +84,20 @@ class PhotoGalley extends Component {
     })
   }
 
+  renderBack(url) {
+    let photo = new Image();
+    photo.src = url;
+    
+    return <img src={back} className='gallery-back' onClick={ e => {this.onBack()} }/>
+  }
+
+  renderForward(url) {
+    let photo = new Image();
+    photo.src = url;
+
+    return <img src={forward} className='gallery-forward' onClick={ e => {this.onForward()} }/>
+  }
+
   closeGallery({ target }) {
     if(this._galleryWrap === target) {
       this.props.onClick();
@@ -83,13 +122,13 @@ class PhotoGalley extends Component {
           </div>
           
           <div className='gallery-photo-wrap'>
-            <img onClick={ e => {this.onForward()} } className='gallery-photo' src={photos[currentIndex].urls.small} />
+            <img key={photos[currentIndex].id} onClick={ e => {this.onForward()} } className='gallery-photo' src={photos[currentIndex].urls.full} />
           </div>
           
           <div className='gallery-controls'>
             {
               currentIndex > 0
-                ? <img src={back} className='gallery-back' onClick={ e => {this.onBack()} } />
+                ? this.renderBack(photos[currentIndex - 1].urls.full)
                 : null
             }
 
@@ -97,7 +136,7 @@ class PhotoGalley extends Component {
 
             {
               currentIndex < photos.length - 1
-                ? <img src={forward} className='gallery-forward' onClick={ e => {this.onForward()} } />
+                ? this.renderForward(photos[currentIndex + 1].urls.full)
                 : null
             }
           </div>

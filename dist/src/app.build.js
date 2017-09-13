@@ -26960,8 +26960,6 @@ var Search = function (_Component) {
     _this.state = {
       value: ''
     };
-
-    _this.props.requestPhotos();
     return _this;
   }
 
@@ -27046,7 +27044,7 @@ function requestPhotos(dispatch, getState) {
 
   setTimeout(function () {
     dispatch(responsePhotoSuccess(photos));
-  }, 0);
+  }, 100);
 
   // unsplash.photos.searchPhotos(searchValue, [], 1, 30)
   //   .then(toJson)
@@ -28447,10 +28445,39 @@ var PhotoGalley = function (_Component) {
     _this.state = {
       currentIndex: currentIndex
     };
+
+    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
     return _this;
   }
 
   _createClass(PhotoGalley, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      document.addEventListener('keydown', this.handleKeyDown);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      document.removeEventListener('keydown', this.handleKeyDown);
+    }
+  }, {
+    key: 'handleKeyDown',
+    value: function handleKeyDown(event) {
+      var key = event.key;
+
+
+      switch (key) {
+        case 'ArrowLeft':
+          return this.onBack();
+        case 'ArrowRight':
+          return this.onForward();
+        case 'Escape':
+          return this.props.onClick();
+        default:
+          return false;
+      }
+    }
+  }, {
     key: 'back',
     value: function back(index, length) {
       var newIndex = index - 1;
@@ -28493,6 +28520,30 @@ var PhotoGalley = function (_Component) {
       });
     }
   }, {
+    key: 'renderBack',
+    value: function renderBack(url) {
+      var _this4 = this;
+
+      var photo = new Image();
+      photo.src = url;
+
+      return _react2.default.createElement('img', { src: _back2.default, className: 'gallery-back', onClick: function onClick(e) {
+          _this4.onBack();
+        } });
+    }
+  }, {
+    key: 'renderForward',
+    value: function renderForward(url) {
+      var _this5 = this;
+
+      var photo = new Image();
+      photo.src = url;
+
+      return _react2.default.createElement('img', { src: _forward2.default, className: 'gallery-forward', onClick: function onClick(e) {
+          _this5.onForward();
+        } });
+    }
+  }, {
     key: 'closeGallery',
     value: function closeGallery(_ref) {
       var target = _ref.target;
@@ -28504,7 +28555,7 @@ var PhotoGalley = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this6 = this;
 
       var _props = this.props,
           photos = _props.photos,
@@ -28515,9 +28566,9 @@ var PhotoGalley = function (_Component) {
       return _react2.default.createElement(
         'div',
         { ref: function ref(link) {
-            return _this4._galleryWrap = link;
+            return _this6._galleryWrap = link;
           }, onClick: function onClick(e) {
-            return _this4.closeGallery(e);
+            return _this6.closeGallery(e);
           }, className: 'gallery-wrap' },
         _react2.default.createElement(
           'div',
@@ -28530,16 +28581,14 @@ var PhotoGalley = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'gallery-photo-wrap' },
-            _react2.default.createElement('img', { onClick: function onClick(e) {
-                _this4.onForward();
-              }, className: 'gallery-photo', src: photos[currentIndex].urls.small })
+            _react2.default.createElement('img', { key: photos[currentIndex].id, onClick: function onClick(e) {
+                _this6.onForward();
+              }, className: 'gallery-photo', src: photos[currentIndex].urls.full })
           ),
           _react2.default.createElement(
             'div',
             { className: 'gallery-controls' },
-            currentIndex > 0 ? _react2.default.createElement('img', { src: _back2.default, className: 'gallery-back', onClick: function onClick(e) {
-                _this4.onBack();
-              } }) : null,
+            currentIndex > 0 ? this.renderBack(photos[currentIndex - 1].urls.full) : null,
             _react2.default.createElement(
               'p',
               null,
@@ -28548,9 +28597,7 @@ var PhotoGalley = function (_Component) {
               ', ',
               currentIndex + 1
             ),
-            currentIndex < photos.length - 1 ? _react2.default.createElement('img', { src: _forward2.default, className: 'gallery-forward', onClick: function onClick(e) {
-                _this4.onForward();
-              } }) : null
+            currentIndex < photos.length - 1 ? this.renderForward(photos[currentIndex + 1].urls.full) : null
           )
         )
       );

@@ -13,19 +13,19 @@ export function requestPhotos(dispatch, getState) {
 
   dispatch({ type: REQUEST_PHOTO });
 
-  setTimeout(() => {
-    dispatch(responsePhotoSuccess(photos));
-  }, 0);
+  // setTimeout(() => {
+  //   dispatch(responsePhotoSuccess(photos));
+  // }, 100);
 
-  // unsplash.photos.searchPhotos(searchValue, [], 1, 30)
-  //   .then(toJson)
-  //   .then(json => {
-  //     console.log(json)
-  //     dispatch(responsePhotoSuccess(json));
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //   })
+  unsplash.photos.searchPhotos(searchValue, [], 1, 30)
+    .then(toJson)
+    .then(json => {
+      console.log(json)
+      dispatch(responsePhotoSuccess(json));
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
 
 export function responsePhotoSuccess(photos) {
