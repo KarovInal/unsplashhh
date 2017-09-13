@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import back from './back.png';
 import forward from './forward.png';
+import close from './close.png';
 
 class PhotoGalley extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class PhotoGalley extends Component {
       <div ref={ link => this._galleryWrap = link } onClick={ e => this.closeGallery(e) } className='gallery-wrap'>
         <div className='gallery-content'>
           <div className='gallery-close'>
-            <button onClick={onClick}>{'x'}</button>
+            <img src={close} onClick={onClick} />
           </div>
           
           <div className='gallery-photo-wrap'>

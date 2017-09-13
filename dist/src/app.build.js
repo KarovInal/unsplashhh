@@ -11323,7 +11323,7 @@ var _app = __webpack_require__(254);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _store = __webpack_require__(279);
+var _store = __webpack_require__(280);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -28221,7 +28221,7 @@ var _PhotoGalley = __webpack_require__(275);
 
 var _PhotoGalley2 = _interopRequireDefault(_PhotoGalley);
 
-var _loader = __webpack_require__(278);
+var _loader = __webpack_require__(279);
 
 var _loader2 = _interopRequireDefault(_loader);
 
@@ -28421,6 +28421,10 @@ var _forward = __webpack_require__(277);
 
 var _forward2 = _interopRequireDefault(_forward);
 
+var _close = __webpack_require__(278);
+
+var _close2 = _interopRequireDefault(_close);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28521,11 +28525,7 @@ var PhotoGalley = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'gallery-close' },
-            _react2.default.createElement(
-              'button',
-              { onClick: onClick },
-              'x'
-            )
+            _react2.default.createElement('img', { src: _close2.default, onClick: onClick })
           ),
           _react2.default.createElement(
             'div',
@@ -28578,38 +28578,13 @@ module.exports = __webpack_require__.p + "../img/icons/forward.png";
 /* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "../img/icons/loader.gif";
+module.exports = __webpack_require__.p + "../img/icons/close.png";
 
 /***/ }),
 /* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(43);
-
-var _reducers = __webpack_require__(280);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
-var _reduxThunk = __webpack_require__(284);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _log = __webpack_require__(285);
-
-var _log2 = _interopRequireDefault(_log);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, _log2.default));
-
-exports.default = store;
+module.exports = __webpack_require__.p + "../img/icons/loader.gif";
 
 /***/ }),
 /* 280 */
@@ -28624,15 +28599,46 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(43);
 
-var _tabs = __webpack_require__(281);
+var _reducers = __webpack_require__(281);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+var _reduxThunk = __webpack_require__(285);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _log = __webpack_require__(286);
+
+var _log2 = _interopRequireDefault(_log);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, _log2.default));
+
+exports.default = store;
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(43);
+
+var _tabs = __webpack_require__(282);
 
 var _tabs2 = _interopRequireDefault(_tabs);
 
-var _currentTab = __webpack_require__(282);
+var _currentTab = __webpack_require__(283);
 
 var _currentTab2 = _interopRequireDefault(_currentTab);
 
-var _isFetch = __webpack_require__(283);
+var _isFetch = __webpack_require__(284);
 
 var _isFetch2 = _interopRequireDefault(_isFetch);
 
@@ -28647,7 +28653,7 @@ var reducer = (0, _redux.combineReducers)({
 exports.default = reducer;
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28690,7 +28696,7 @@ function tabs() {
 }
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28713,7 +28719,7 @@ function currentTab() {
 }
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28741,7 +28747,7 @@ function isFetch() {
 }
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28770,7 +28776,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
