@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import Search from '../../components/Search/Search.js';
-import { requestPhotos, setSearchValue } from '../../actions/tabs.js';
+import Search from '../../components/Search';
+import { requestPhotos, setSearchValue } from '../../actions/Search';
 
 let mapStateToProps = state => (
   {
-    currentTab: state.currentTab
+    currentTab: state.tabs[state.currentTab]
   }
 )
 

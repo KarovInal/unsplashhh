@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import DisplayPhotos from '../../components/DisplayPhotos/DisplayPhotos.js';
+import DisplayPhotos from '../../components/DisplayPhotos';
 
 function mapStateToProps(state) {
-  let { currentTab, isFetch } = state;
+  let { currentTab, fetch } = state;
 
   return {
     photos: state.tabs[currentTab].photos,
-    isFetch
+    fetch
   }
 }
 

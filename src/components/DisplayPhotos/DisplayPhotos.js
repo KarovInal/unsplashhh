@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PhotoItem from './PhotoItem.js';
-import PhotoGalley from './PhotoGalley.js';
+import PhotoGallery from '../PhotoGallery';
+import PhotoItem from '../PhotoItem';
 
 import loader from './loader.gif';
 
@@ -26,7 +26,7 @@ class DisplayPhotos extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let isFetch = nextProps.isFetch;
+    let isFetch = nextProps.fetch;
 
     if(isFetch) {
       this.setState(() => {
@@ -49,30 +49,37 @@ class DisplayPhotos extends Component {
   render() {
     let { photos } = this.props;
     let { isDispalayPhoto, currentIndex } = this.state;
+    let { status, isFetch, message } = this.props.fetch;
 
     return (
       <div>
         {
-          this.props.isFetch ? <img className='loader-gif' src={loader} /> : null
+          isFetch ? <img className='loader-gif' src={loader} /> : null
         }
+
+        {
+          status != 'success'
+            ? null 
+            : <div className='list-photos'>
+                {
+                  photos.map((photo, index) => 
+                    <PhotoItem 
+                      key   = { photo.id } 
+                      photo = { photo }
+                      index = { index }
+                      onClickSmallPhoto={ photo => this.onClickSmallPhoto(photo) } />)
+                }
+              </div>
+        }
+
         {
           isDispalayPhoto ? 
-            <PhotoGalley 
+            <PhotoGallery 
               photos={ photos }
               currentIndex={ currentIndex }
               onClick={ e => this.onCloseGallery() }/>
             : null
         }
-        <div className='list-photos'>
-          {
-            photos.map((photo, index) => 
-              <PhotoItem 
-                key={ photo.id } 
-                photo={ photo }
-                index={ index }
-                onClickSmallPhoto={ photo => this.onClickSmallPhoto(photo) } />)
-          }
-        </div>
       </div>
     )
   }

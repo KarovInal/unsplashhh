@@ -1,49 +1,33 @@
+import unsplash, { toJson } from '../../config/unsplash.js';
+
 import {
   REQUEST_PHOTO, 
   RESPONSE_PHOTOS_SUCСESS, 
   RESPONSE_PHOTOS_ERROR,
-  SET_SEARCH_VALUE } from '../constants/tabs.js';
+  SET_SEARCH_VALUE } from '../../constants/tabs.js';
 
-import unsplash, { toJson } from '../config/unsplash.js';
+import {
+  responsePhotoSuccess,
+  responsePhotoError,
+  setSearchValue } from './index.js';
 
 export function requestPhotos(dispatch, getState) {
-  let state = getState();
-  let { currentTab } = state;
-  let { searchValue } = state.tabs[currentTab];
+  let state = getState(),
+    { currentTab } = state,
+    { searchValue } = state.tabs[currentTab];
 
   dispatch({ type: REQUEST_PHOTO });
 
-  // setTimeout(() => {
-  //   dispatch(responsePhotoSuccess(photos));
-  // }, 100);
-
-  unsplash.photos.searchPhotos(searchValue, [], 1, 30)
+  unsplash.photos.searchPhotos(searchValue, [], 1, 15)
     .then(toJson)
     .then(json => {
-      console.log(json)
+      console.log('SUCCESS', json);
       dispatch(responsePhotoSuccess(json));
     })
     .catch(error => {
-      console.log(error)
+      console.log('ERROR', error);
+      dispatch(responsePhotoError(error));
     })
-}
-
-export function responsePhotoSuccess(photos) {
-  return {
-    type: RESPONSE_PHOTOS_SUCСESS,
-    data: {
-      photos: photos
-    }
-  }
-}
-
-export function setSearchValue(searchValue) {
-  return {
-    type: SET_SEARCH_VALUE,
-    data: {
-      searchValue
-    }
-  }
 }
 
 

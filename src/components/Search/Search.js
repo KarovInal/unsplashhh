@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 class Search extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       value: ''
-    }
+    };
   }
   onChangeInput({target: { value }}) {
     this.setState((state) => {
@@ -18,10 +19,13 @@ class Search extends Component {
     e.preventDefault();
     this._input.blur();
 
-    let searchValue = this.state.value;
-    
-    this.props.setSearchValue(searchValue);
-    this.props.requestPhotos();
+    let newSearchValue = this.state.value,
+        currentSearchValue = this.props.currentTab.searchValue;
+        
+    if(newSearchValue !== currentSearchValue) {
+      this.props.setSearchValue(newSearchValue);
+      this.props.requestPhotos(); 
+    }
   }
   render() {
     let {
@@ -30,7 +34,12 @@ class Search extends Component {
 
     return (
       <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
-        <input className='photo-input' ref={ link => this._input = link } placeholder='Что будем искать?' value={value} onChange={ e => this.onChangeInput(e) } />
+        <input 
+          className='photo-input' 
+          ref={ link => this._input = link } 
+          placeholder='Что будем искать?' 
+          value={value} 
+          onChange={ e => this.onChangeInput(e) } />
       </form>
     )
   }
