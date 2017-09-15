@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import PhotoGallery from '../PhotoGallery';
 import PhotoItem from '../PhotoItem';
 
@@ -59,7 +60,7 @@ class DisplayPhotos extends Component {
 
         {
           status != 'success'
-            ? null 
+            ? null
             : <div className='list-photos'>
                 {
                   photos.map((photo, index) => 

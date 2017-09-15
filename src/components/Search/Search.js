@@ -8,6 +8,17 @@ class Search extends Component {
       value: ''
     };
   }
+  componentWillReceiveProps(nextProps) {
+    let { searchValue } = nextProps.currentTab;
+    
+    if(this.state.value !== searchValue) {
+      this.setState(() => {
+        return {
+          value: searchValue
+        }
+      })
+    }
+  }
   onChangeInput({target: { value }}) {
     this.setState((state) => {
       return {
@@ -33,14 +44,16 @@ class Search extends Component {
     } = this.state;
 
     return (
-      <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
-        <input 
-          className='photo-input' 
-          ref={ link => this._input = link } 
-          placeholder='Что будем искать?' 
-          value={value} 
-          onChange={ e => this.onChangeInput(e) } />
-      </form>
+      <div>
+        <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
+          <input 
+            className='photo-input' 
+            ref={ link => this._input = link } 
+            placeholder='Что будем искать?' 
+            value={value}
+            onChange={ e => this.onChangeInput(e) } />
+        </form>
+      </div>
     )
   }
 }

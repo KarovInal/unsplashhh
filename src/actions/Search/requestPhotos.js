@@ -22,6 +22,11 @@ export function requestPhotos(dispatch, getState) {
     .then(toJson)
     .then(json => {
       console.log('SUCCESS', json);
+
+      if(!json.length) {
+        throw new Error('Ничего не найдено...')
+      }
+
       dispatch(responsePhotoSuccess(json));
     })
     .catch(error => {

@@ -23,8 +23,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif)/,
-        exclude: /node_modules/,
+        test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff)/,
         use: [
           {
             loader: 'file-loader',
@@ -32,6 +31,13 @@ module.exports = {
               name: '../img/icons/[name].[ext]'
             }
           }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
         ]
       }
     ]
