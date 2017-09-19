@@ -8,9 +8,9 @@ import {
     SET_SEARCH_VALUE } from '../constants/tabs.js'
 
 const defaultTabs = {
-  [searchTab]: { photos: [], searchValue: '' },
-  [downloadedTab]: { photos: [], searchValue: '' },
-  [favoritTab]: { photos: [], searchValue: '' }
+  searchTab: { photos: [], searchValue: '' },
+  downloadedTab: { photos: [], searchValue: '' },
+  favoritTab: { photos: [], searchValue: '' }
 }
 
 export default function tabs(state = defaultTabs, action) {

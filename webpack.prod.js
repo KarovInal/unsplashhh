@@ -30,7 +30,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '../img/icons/[name].[ext]'
+              name: './src/img/icons/[name].[ext]'
             }
           }
         ]

@@ -1,40 +1,48 @@
 let listOfSearch = [
   {
-    text: 'Животные',
-    tag: 'animal'
+     "text":"Животные",
+     "tag":"animal",
+     "id":0
   },
   {
-    text: 'Машины',
-    tag: 'car'
+     "text":"Машины",
+     "tag":"car",
+     "id":1
   },
   {
-    text: 'Здания',
-    tag: 'build'
+     "text":"Здания",
+     "tag":"build",
+     "id":2
   },
   {
-    text: 'Любовь',
-    tag: 'love'
+     "text":"Любовь",
+     "tag":"love",
+     "id":3
   },
   {
-    text: 'Черное',
-    tag: 'black'
+     "text":"Черное",
+     "tag":"black",
+     "id":4
   },
   {
-    text: 'Белое',
-    tag: 'white'
+     "text":"Белое",
+     "tag":"white",
+     "id":5
   },
   {
-    text: 'Стиль',
-    tag: 'style'
+     "text":"Стиль",
+     "tag":"style",
+     "id":6
   },
   {
-    text: 'Код',
-    tag: 'code'
+     "text":"Код",
+     "tag":"code",
+     "id":7
   },
   {
-    text: 'Радость',
-    tag: 'fun'
+     "text":"Радость",
+     "tag":"fun",
+     "id":8
   }
-];
-
+]
 export default listOfSearch;

@@ -13,8 +13,8 @@ import {
 
 export function requestPhotos(dispatch, getState) {
   let state = getState(),
-    { currentTab } = state,
-    { searchValue } = state.tabs[currentTab];
+     {currentTab} = state,
+     {searchValue} = state.tabs[currentTab];
 
   dispatch({ type: REQUEST_PHOTO });
 
@@ -31,6 +31,7 @@ export function requestPhotos(dispatch, getState) {
     })
     .catch(error => {
       console.log('ERROR', error);
+
       dispatch(responsePhotoError(error));
     })
 }

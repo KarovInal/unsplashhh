@@ -44,14 +44,15 @@ class Search extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className='form-wrap'>
         <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
           <input 
-            className='photo-input' 
+            className='photo-form-input'
             ref={ link => this._input = link } 
             placeholder='Что будем искать?' 
             value={value}
             onChange={ e => this.onChangeInput(e) } />
+          <button className='photo-form-button'>Найти</button>
         </form>
       </div>
     )

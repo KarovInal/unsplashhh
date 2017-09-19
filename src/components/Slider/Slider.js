@@ -1,35 +1,62 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Slide from './Slide.js';
+import Slice from '../../utils/slice.js';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './slider.css'
+import './slider.css';
+import back from './back.png';
+import forward from './forward.png';
 
 import { listForSearch } from '../../config';
 
-var settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  swipeToSlide: true,
-  swipe: true
-};
+var slice = Slice(listForSearch).next(4);
 
-export default function SliderComponent({ requestPhotos }) {
-  return (
-    <div className='slider-wrap'>
-      <Slider {...settings}>
-        {
-          listForSearch.map((slide, index) => {
-            return (
-              <div key={index}>
-                <Slide slide={slide} requestPhotos={requestPhotos} />
-              </div>
-            )
-          })
-        }
-      </Slider>
-    </div>
-  );
-}
+export default class SliderComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sliders: []
+    }
+  }
+  backSlide() {
+    this.setState(() => {
+      return {
+        sliders: slice.back(4)
+      }
+    }) 
+  }
+  nextSlide() {
+    this.setState(() => {
+      return {
+        sliders: slice.next(4)
+      }
+    })
+  }
+  render() {
+    let {
+      requestPhotos,
+    } = this.props;
+
+    let slids = slice.getSlice().map((slide) => {
+      return <Slide key={slide.id} slide={slide} requestPhotos={(tag) => requestPhotos(tag)}/>
+    })
+
+    return (
+        <div className='slider-wrap' ref={link => this._sliderWrap = link}>
+          <img className='slider-back' src={back} onClick={e => this.backSlide()} />
+            <ReactCSSTransitionGroup 
+              transitionName="slids"
+              component='div'
+              className='slider-items'
+              transitionAppear={true}
+              transitionLeave={false}
+              transitionEnterTimeout={100}
+              transitionAppearTimeout={1000}>
+                { slids }
+            </ReactCSSTransitionGroup>
+          <img className='slider-forward' src={forward} onClick={e => this.nextSlide()} />
+        </div>
+    );
+  }
+};
