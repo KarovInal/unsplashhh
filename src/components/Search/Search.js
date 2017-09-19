@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Title from '../Title';
 
 class Search extends Component {
   constructor(props) {
@@ -7,6 +8,12 @@ class Search extends Component {
     this.state = {
       value: ''
     };
+  }
+  componentWillMount() {
+    this._showTitle = true;
+  }
+  componentDidMount() {
+    this._showTitle = false;
   }
   componentWillReceiveProps(nextProps) {
     let { searchValue } = nextProps.currentTab;
@@ -45,6 +52,11 @@ class Search extends Component {
 
     return (
       <div className='form-wrap'>
+        {
+          this._showTitle
+            ? <Title />
+            : null
+        }
         <form className='photo-form' onSubmit={ e => this.onSubmitSearch(e) }>
           <input 
             className='photo-form-input'
