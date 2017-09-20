@@ -1,0 +1,21 @@
+.statistic-item {
+  width: 100%;
+}
+
+.statistic-head {
+  margin: 0;
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+}
+
+.statistic-data {
+  font-size: 25px;
+  margin: 10px 0px;
+  color: white;
+  font-weight: 100;
+}
+
+.statistic-loader {
+  width: 40px;
+}

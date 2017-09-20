@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import Slide from './Slide.js';
+import Slide from './Slide';
 import Slice from '../../utils/slice.js';
 
-import './slider.css';
-import back from './back.png';
-import forward from './forward.png';
+import './css/slider.css';
+import back from './img/back.png';
+import forward from './img/forward.png';
 
 import { listForSearch } from '../../config';
 

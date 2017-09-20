@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
+import User from '../User';
+import GalleryControl from './GalleryControl';
+import PhotoStatistic from './PhotoStatistic';
 
-import back from './back.png';
-import forward from './forward.png';
-import close from './close.png';
+import './css/style.css';
+import back from './img/back.png';
+import forward from './img/forward.png';
+import close from './img/close.png';
 
 class PhotoGalley extends Component {
   constructor(props) {
     super(props);
     
-    let {
-      currentIndex
-    } = this.props;
+    let { currentIndex } = this.props;
 
-    this.state = {
-      currentIndex
-    }
+    this.state = { 
+      currentIndex 
+    };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
@@ -87,7 +89,7 @@ class PhotoGalley extends Component {
   renderBack(url) {
     let photo = new Image();
     photo.src = url;
-    
+
     return <img src={back} className='gallery-back' onClick={ e => {this.onBack()} }/>
   }
 
@@ -110,36 +112,42 @@ class PhotoGalley extends Component {
       onClick
     } = this.props;
 
-    let {
-      currentIndex
-    } = this.state;
+    let currentIndex = this.state.currentIndex,
+        photo        = photos[currentIndex];
 
     return (
-      <div ref={ link => this._galleryWrap = link } onClick={ e => this.closeGallery(e) } className='gallery-wrap'>
+      <div ref       = {link => this._galleryWrap = link} 
+           onClick   = {e => this.closeGallery(e)}
+           className = 'gallery-wrap'>
+           
         <div className='gallery-content'>
+          {/* Иконка закрытия */}
           <div className='gallery-close'>
             <img src={close} onClick={onClick} />
           </div>
           
-          <div className='gallery-photo-wrap'>
-            <img key={photos[currentIndex].id} onClick={ e => {this.onForward()} } className='gallery-photo' src={photos[currentIndex].urls.full} />
+          {/* Иконка и имя автора */}
+          <div className='gallery-user'>
+            <User key  = {photo.id}
+                  user = {photo.user}/>
           </div>
           
-          <div className='gallery-controls'>
-            {
-              currentIndex > 0
-                ? this.renderBack(photos[currentIndex - 1].urls.full)
-                : null
-            }
-
-            <p>Photos: {photos.length}, {currentIndex + 1}</p>
-
-            {
-              currentIndex < photos.length - 1
-                ? this.renderForward(photos[currentIndex + 1].urls.full)
-                : null
-            }
+          {/* Главное изображение */}
+          <div className='gallery-photo-wrap'>
+            <img key       = {photo.id}
+                 src       = {photo.urls.regular}
+                 onClick   = {() => this.onForward()}
+                 className = 'gallery-photo'/>
           </div>
+          
+          {/* Панель управления <-- --> */}
+          <GalleryControl photos        = {photos}
+                          renderBack    = {url => this.renderBack(url)}
+                          renderForward = {url => this.renderForward(url)}
+                          currentIndex  = {currentIndex}/>
+          
+          {/* Статистика фотографии */}
+          <PhotoStatistic id={photo.id} />
         </div>
       </div>
     )

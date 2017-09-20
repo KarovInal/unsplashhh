@@ -1,22 +1,22 @@
 import unsplash, { toJson } from '../../config/unsplash.js';
 
-import {
-  REQUEST_PHOTO, 
-  RESPONSE_PHOTOS_SUCСESS, 
-  RESPONSE_PHOTOS_ERROR,
-  SET_SEARCH_VALUE } from '../../constants/tabs.js';
+import { REQUEST_PHOTO, 
+         RESPONSE_PHOTOS_SUCСESS, 
+         RESPONSE_PHOTOS_ERROR,
+         SET_SEARCH_VALUE } from '../../constants/tabs.js';
 
-import {
-  responsePhotoSuccess,
-  responsePhotoError,
-  setSearchValue } from './index.js';
+import { responsePhotoSuccess,
+         responsePhotoError,
+         setSearchValue } from './index.js';
 
 export function requestPhotos(dispatch, getState) {
-  let state = getState(),
-     {currentTab} = state,
+  let state        = getState(),
+      currentTab   = state.currentTab,
      {searchValue} = state.tabs[currentTab];
 
   dispatch({ type: REQUEST_PHOTO });
+
+  // dispatch(responsePhotoSuccess(photos));
 
   unsplash.photos.searchPhotos(searchValue, [], 1, 15)
     .then(toJson)

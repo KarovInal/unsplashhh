@@ -1,0 +1,88 @@
+.gallery-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.gallery-photo {
+  width: 100%;
+  max-width: 900px;
+  cursor: pointer;
+}
+
+.gallery-content {
+  width: 100%;
+  max-width: 900px;
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.gallery-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.gallery-close img {
+  height: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.gallery-controls {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-top: -4px;
+  line-height: 40px;
+  vertical-align: middle;
+  background-color: #0d0d0d;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.gallery-back {
+  display: block;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  left: 0;
+  top: 50%;
+  margin: 0;
+  margin-top: -15px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.gallery-forward {
+  display: block;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  right: 0;
+  top: 50%;
+  margin: 0;
+  margin-top: -15px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  cursor: pointer;  
+}
+
+.gallery-user {
+  width: 100%;
+  text-align: left;
+  background-color: #D4D4D4;
+  padding-left: 5px;
+  border-radius: 5px 5px 0px 0px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+}

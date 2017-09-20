@@ -1,5 +1,6 @@
 import React from 'react';
 import download from './download.png';
+import User from '../User';
 
 export default function(props) {
   let {
@@ -18,10 +19,7 @@ export default function(props) {
         <img className='photo-small-img' src={ urls.small } onClick={ e => onClickSmallPhoto(index) }/>
       </div>
       <div className='photo-info-wrap'>
-        <a href={ user.links.html } target='_blank' className='photo-small-user'>
-          <img src={user.profile_image.small} className='photo-user-img' />
-          <p className='photo-user-name'>{ user.first_name }</p>
-        </a>
+        <User user={ user } />
         <a className='photo-download-link' rel="nofollow" target="_blank" href={ `${links.download}/?force=true` }><img src={download} /></a>
       </div>
     </div>

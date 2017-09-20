@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import style from './style.css';
+import style from './css/style.css';
 
-import git from './git.png';
-import insta from './insta.png';
-import twitter from './twitter.png';
+import git from './img/git.png';
+import insta from './img/insta.png';
+import twitter from './img/twitter.png';
 
 export default function Title() {
   return (

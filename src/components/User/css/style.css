@@ -1,0 +1,21 @@
+.user-link {
+  height: inherit;
+  line-height: inherit;
+  display: inline-block;
+  color: black
+}
+
+.user-name {
+  line-height: inherit;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.user-avatar {
+  line-height: inherit;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  margin-right: 5px;
+}
