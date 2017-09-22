@@ -17,7 +17,9 @@ export default function(props) {
     description,
     color
   } = props.photo;
+
   let width = parseQuery(urls.small).w;
+
   let { height } = resizeByWidth(
     fullWidth,
     fullHeight,
@@ -29,12 +31,12 @@ export default function(props) {
   return (
     <div className='photo-small-item'>
       <div className='photo-small-img-wrap' onClick={ e => onClickSmallPhoto(index) }>
-        <PreloadImage full  = {urls.small}
-                      block = {{
-                        height: `${height}px`,
-                        width: '100%',
-                        backgroundColor: color
-                      }} />
+        <PreloadImage full={urls.small} small=''>
+          {(src, isLoad) => {
+            return isLoad 
+                    ? <img src={src} /> : <div style={{backgroundColor: color, height, width: '100%'}}></div>
+          }}
+        </PreloadImage>
       </div>
       <div className='photo-info-wrap'>
         <User user={ user } />

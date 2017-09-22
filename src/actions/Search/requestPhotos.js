@@ -16,24 +16,24 @@ export function requestPhotos(dispatch, getState) {
 
   dispatch({ type: REQUEST_PHOTO });
 
-  // dispatch(responsePhotoSuccess(photos));
+  dispatch(responsePhotoSuccess(photos));
 
-  unsplash.photos.searchPhotos(searchValue, [], 1, 15)
-    .then(toJson)
-    .then(json => {
-      console.log('SUCCESS', json);
+  // unsplash.photos.searchPhotos(searchValue, [], 1, 15)
+  //   .then(toJson)
+  //   .then(json => {
+  //     console.log('SUCCESS', json);
 
-      if(!json.length) {
-        throw new Error('Ничего не найдено...')
-      }
+  //     if(!json.length) {
+  //       throw new Error('Ничего не найдено...')
+  //     }
 
-      dispatch(responsePhotoSuccess(json));
-    })
-    .catch(error => {
-      console.log('ERROR', error);
+  //     dispatch(responsePhotoSuccess(json));
+  //   })
+  //   .catch(error => {
+  //     console.log('ERROR', error);
 
-      dispatch(responsePhotoError(error));
-    })
+  //     dispatch(responsePhotoError(error));
+  //   })
 }
 
 

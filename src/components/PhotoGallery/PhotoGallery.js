@@ -91,15 +91,15 @@ class PhotoGalley extends Component {
   }
 
   renderBack(url) {
-    let photo = new Image();
-    photo.src = url;
+    // let photo = new Image();
+    // photo.src = url;
 
     return <img src={back} className='gallery-back' onClick={ e => {this.onBack()} }/>
   }
 
   renderForward(url) {
-    let photo = new Image();
-    photo.src = url;
+    // let photo = new Image();
+    // photo.src = url;
 
     return <img src={forward} className='gallery-forward' onClick={ e => {this.onForward()} }/>
   }
@@ -147,9 +147,10 @@ class PhotoGalley extends Component {
           {/* Главное изображение */}
           <div className='gallery-photo-wrap' onClick={() => this.onForward()}>
               <PreloadImage key       = {photo.id}
-                            full      = {photo.urls.full} 
-                            small     = {photo.urls.small}
-                            className = 'gallery-photo'/>
+                            full      = {photo.urls.full}
+                            small     = {photo.urls.small}>
+                {src => <img src={src} className='gallery-photo'/>}
+              </PreloadImage>
             {/* <img key       = {photo.id}
                  src       = {photo.urls.regular}
                  width     = '100%'

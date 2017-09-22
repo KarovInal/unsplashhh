@@ -1,6 +1,6 @@
+//Thanks https://github.com/FormidableLabs/react-progressive-image
+
 import React, { Component } from 'react';
-import Block from './Block.js';
-import ImagePreview from './ImagePreview.js';
 
 class PreloadImage extends Component {
   constructor(props) {
@@ -8,52 +8,35 @@ class PreloadImage extends Component {
 
     this.state = {
       isLoad: false,
-      preloadBlock: this.props.block ? true : false,
-      preloadImage: this.props.small ? true : false
+      src: this.props.small
     }
 
     this.loadedFull = this.loadedFull.bind(this);
   }
 
   componentDidMount() {
-    this.full = new Image();
-    this.full.src = this.props.full;
+    this.image = new Image();
+    this.image.src = this.props.full;
 
-    this.full.onload = this.loadedFull;
+    this.image.onload = this.loadedFull;
   }
 
   componentWillUnmount() {
-    this.full.onload = null;
+    this.image.onload = null;
   }
   
   loadedFull() {
     this.setState({
       isLoad: true,
-      preloadBlock: false,
-      preloadImage: false
+      src: this.props.full
     })
   }
 
   render() {
-    return (
-      <div>
-        {
-          this.state.isLoad 
-            ? <img className={this.props.className} src={this.props.full} />
-            : null
-        }
-        {
-          this.state.preloadBlock
-            ? <Block {...this.props.block}/>
-            : null
-        }
-        {
-          this.state.preloadImage
-            ? <ImagePreview className={ this.props.className } small={this.props.small}/>
-            : null
-        }
-      </div>
-    )
+    let { src, isLoad } = this.state;
+    let { children } = this.props;
+
+    return children(src, isLoad);
   }
 }
 
