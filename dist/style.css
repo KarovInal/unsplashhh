@@ -57,6 +57,7 @@ body {
 
 .photo-small-item {
   max-width: 300px;
+  width: 100%;
   display: inline-block;
   box-sizing: border-box;
   margin: 10px;
@@ -73,7 +74,7 @@ body {
 
 .photo-small-img {
   width: 100%;
-  cursor: pointer;
+  object-fit: cover;
 }
 
 .photo-info-wrap {

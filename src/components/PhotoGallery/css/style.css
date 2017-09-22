@@ -86,3 +86,27 @@
   line-height: 40px;
   box-sizing: border-box;
 }
+
+.gallery-photo-wrap {
+  background-color: gray;
+}
+
+.gallery-photo-wrap img {
+  object-fit: cover;
+}
+
+.gallery-photo-download {
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #E7061C;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+}
+
+.gallery-photo-download a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}

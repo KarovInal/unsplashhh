@@ -41,5 +41,8 @@
     "unsplash-js": "^4.6.0",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "react-progressive-image": "^0.1.2"
   }
 }

@@ -58,6 +58,9 @@ class PhotoStatistic extends Component {
           console.log('ID поменяли...')
         }
       })
+    .catch(error => {
+      console.log(error)
+    })
   }
   render() {
     let { 
