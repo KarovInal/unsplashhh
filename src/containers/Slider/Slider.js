@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Slider from '../../components/Slider';
 
-import { requestPhotos, setSearchValue } from '../../actions/Search';
+import { requestPhotos, setSearchValue } from '../../modules/tabs.js';
 
 function mapDispatchToProps(dispatch) {
   return {

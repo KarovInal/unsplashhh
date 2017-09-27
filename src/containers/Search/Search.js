@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Search from '../../components/Search';
-import { requestPhotos, setSearchValue } from '../../actions/Search';
+import { requestPhotos, setSearchValue } from '../../modules/tabs.js';
 
 let mapStateToProps = state => (
   {

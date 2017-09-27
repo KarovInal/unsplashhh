@@ -1,9 +1,9 @@
-import Error from './Error.js';
-import Success from './Success.js';
+import ErrorComponent from './Error.js';
+import SuccessComponent from './Success.js';
 
 import './notification.css';
 
 export {
-  Error,
-  Success
+  ErrorComponent,
+  SuccessComponent
 }

@@ -18,15 +18,18 @@ export default function(props) {
     color
   } = props.photo;
 
+  // index - индекс изображения в  
+  let { onClickSmallPhoto, index } = props;
+
+  // Получить рзамер превью изображения из url строки
   let width = parseQuery(urls.small).w;
 
+  // Вычислить новый размер, для превью изображения 
   let { height } = resizeByWidth(
     fullWidth,
     fullHeight,
     width
   );
-
-  let { onClickSmallPhoto, index } = props;
   
   return (
     <div className='photo-small-item'>
@@ -34,10 +37,12 @@ export default function(props) {
         <PreloadImage full={urls.small} small=''>
           {(src, isLoad) => {
             return isLoad 
-                    ? <img src={src} /> : <div style={{backgroundColor: color, height, width: '100%'}}></div>
+                    ? <img src={src} /> 
+                    : <div style={{backgroundColor: color, height, width: '100%'}}></div>
           }}
         </PreloadImage>
       </div>
+
       <div className='photo-info-wrap'>
         <User user={ user } />
         <a className='photo-download-link' rel="nofollow" target="_blank" href={ `${links.download}/?force=true` }><img src={download} /></a>

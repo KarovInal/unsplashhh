@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Error(props) {
+function ErrorComponent(props) {
   return (
     <div className='notice-error'>
       {props.children}
@@ -8,4 +8,4 @@ function Error(props) {
   )
 }
 
-export default Error;
+export default ErrorComponent;

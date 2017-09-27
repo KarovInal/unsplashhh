@@ -13,7 +13,7 @@ export function requestPhotos(dispatch, getState) {
   let state        = getState(),
       currentTab   = state.currentTab,
      {searchValue} = state.tabs[currentTab];
-
+     
   dispatch({ type: REQUEST_PHOTO });
 
   dispatch(responsePhotoSuccess(photos));

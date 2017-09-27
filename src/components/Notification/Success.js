@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Success(props) {
+function SuccessComponent(props) {
   return (
     <div className='notice-success'>
       {props.children}
@@ -8,4 +8,4 @@ function Success(props) {
   )
 }
 
-export default Success;
+export default SuccessComponent;

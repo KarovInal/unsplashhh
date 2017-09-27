@@ -59,9 +59,8 @@ class DisplayPhotos extends Component {
         }
 
         {
-          status != 'success'
-            ? null
-            : <div className='list-photos'>
+          status === 'success'
+            ? <div className='list-photos'>
                 {
                   photos.map((photo, index) => 
                     <PhotoItem 
@@ -71,6 +70,7 @@ class DisplayPhotos extends Component {
                       onClickSmallPhoto={ photo => this.onClickSmallPhoto(photo) } />)
                 }
               </div>
+            : null
         }
 
         {
